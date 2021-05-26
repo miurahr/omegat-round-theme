@@ -1,11 +1,11 @@
+
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2021 Hiroshi Miura
                Home page: http://www.omegat.org/
-               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -23,36 +23,42 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core;
+package tokyo.northside.omegat.laf;
 
-import org.omegat.core.threads.IAutoSave;
-import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.glossary.IGlossaries;
-import org.omegat.gui.main.IMainWindow;
+import com.formdev.flatlaf.FlatLightLaf;
 
-/**
- * Core initializer for unit tests.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public final class TestCoreInitializer {
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
-    private TestCoreInitializer() {
+public class CustomLookAndFeel {
+    private CustomLookAndFeel() {
     }
 
-    public static void initEditor(IEditor editor) {
-        Core.editor = editor;
+    /**
+     * load plugin.
+     */
+    public static void loadPlugins() {
+        setApplicationLaf();
     }
 
-    public static void initAutoSave(IAutoSave autoSave) {
-        Core.saveThread = autoSave;
+    /**
+     * unload plugin.
+     */
+    public static void unloadPlugins() {
     }
 
-    public static void initMainWindow(IMainWindow mainWindow) {
-        Core.setMainWindow(mainWindow);
-    }
-
-    public static void initGlossary(IGlossaries glossaries) {
-        Core.glossary = glossaries;
+    /**
+     * Set LookAndFeel default and load application colors
+     */
+    public static void setApplicationLaf() {
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.put( "Button.arc", 999 );
+            UIManager.put( "Component.arc", 999 );
+            UIManager.put( "ProgressBar.arc", 999 );
+            UIManager.put( "TextComponent.arc", 999 );
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
     }
 }
