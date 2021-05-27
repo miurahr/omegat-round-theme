@@ -26,6 +26,7 @@
 package tokyo.northside.omegat.laf;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import org.omegat.util.gui.UIDesignManager;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -38,7 +39,7 @@ public class CustomLookAndFeel {
      * load plugin.
      */
     public static void loadPlugins() {
-        setApplicationLaf();
+        UIDesignManager.registerThemeLoader(FlatLafloader);
     }
 
     /**
@@ -47,18 +48,25 @@ public class CustomLookAndFeel {
     public static void unloadPlugins() {
     }
 
-    /**
-     * Set LookAndFeel default and load application colors
-     */
-    public static void setApplicationLaf() {
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-            UIManager.put( "Button.arc", 999 );
-            UIManager.put( "Component.arc", 999 );
-            UIManager.put( "ProgressBar.arc", 999 );
-            UIManager.put( "TextComponent.arc", 999 );
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+    public static class FlatLafloader extends IThemeLoader {
+
+        public static String getName() {
+            return "Flat Light LaF";
+        }
+
+        /**
+         * Set LookAndFeel default and load application colors
+         */
+        public static void onStartup() {
+            try {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+                UIManager.put( "Button.arc", 999 );
+                UIManager.put( "Component.arc", 999 );
+                UIManager.put( "ProgressBar.arc", 999 );
+                UIManager.put( "TextComponent.arc", 999 );
+            } catch (UnsupportedLookAndFeelException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
