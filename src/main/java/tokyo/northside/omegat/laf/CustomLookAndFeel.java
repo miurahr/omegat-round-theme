@@ -26,6 +26,7 @@
 package tokyo.northside.omegat.laf;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import org.omegat.util.gui.IThemeLoader;
 import org.omegat.util.gui.UIDesignManager;
 
 import javax.swing.UIManager;
@@ -39,7 +40,7 @@ public class CustomLookAndFeel {
      * load plugin.
      */
     public static void loadPlugins() {
-        UIDesignManager.registerThemeLoader(FlatLafloader);
+        UIDesignManager.registerThemeloader(new FlatLafloader());
     }
 
     /**
@@ -48,16 +49,16 @@ public class CustomLookAndFeel {
     public static void unloadPlugins() {
     }
 
-    public static class FlatLafloader extends IThemeLoader {
+    public static class FlatLafloader implements IThemeLoader {
 
-        public static String getName() {
+        public String getName() {
             return "Flat Light LaF";
         }
 
         /**
          * Set LookAndFeel default and load application colors
          */
-        public static void onStartup() {
+        public void onStartup() {
             try {
                 UIManager.setLookAndFeel(new FlatLightLaf());
                 UIManager.put( "Button.arc", 999 );

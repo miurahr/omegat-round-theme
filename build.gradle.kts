@@ -8,8 +8,12 @@ plugins {
 
 version = "0.0.1"
 
+repositories {
+    mavenLocal()
+}
+
 omegat {
-    version = "5.5.0"
+    version = "5.6.0"
     pluginClass = "tokyo.northside.omegat.laf.CustomLookAndFeel"
 }
 
