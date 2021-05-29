@@ -1,4 +1,3 @@
-
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
@@ -25,49 +24,22 @@
 
 package tokyo.northside.omegat.laf;
 
-import com.formdev.flatlaf.FlatLightLaf;
-import org.omegat.util.gui.IThemeLoader;
 import org.omegat.util.gui.UIDesignManager;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-public class CustomLookAndFeel {
+public final class CustomLookAndFeel {
+
     private CustomLookAndFeel() {
     }
 
-    /**
-     * load plugin.
-     */
     public static void loadPlugins() {
-        UIDesignManager.registerThemeloader(new FlatLafloader());
+        UIDesignManager.registerTheme("FlatLaf Dark","com.formdev.flatlaf.FlatDarkLaf");
+        UIDesignManager.registerTheme("FlatLaf Light","com.formdev.flatlaf.FlatLightLaf");
+        UIDesignManager.registerTheme("Arc", "com.formdev.flatlaf.intellijthemes.FlatArcIJTheme");
+        UIDesignManager.registerTheme("Arc - Orange", "com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme");
     }
 
-    /**
-     * unload plugin.
-     */
     public static void unloadPlugins() {
     }
 
-    public static class FlatLafloader implements IThemeLoader {
-
-        public String getName() {
-            return "Flat Light LaF";
-        }
-
-        /**
-         * Set LookAndFeel default and load application colors
-         */
-        public void onStartup() {
-            try {
-                UIManager.setLookAndFeel(new FlatLightLaf());
-                UIManager.put( "Button.arc", 999 );
-                UIManager.put( "Component.arc", 999 );
-                UIManager.put( "ProgressBar.arc", 999 );
-                UIManager.put( "TextComponent.arc", 999 );
-            } catch (UnsupportedLookAndFeelException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

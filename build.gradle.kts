@@ -19,6 +19,7 @@ omegat {
 
 dependencies {
     packIntoJar("com.formdev:flatlaf:1.2")
+    packIntoJar("com.formdev:flatlaf-intellij-themes:1.2")
 }
 
 checkstyle {
