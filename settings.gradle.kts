@@ -1,1 +1,1 @@
-rootProject.name = "omegat-laf"
+rootProject.name = "omegat-flatlaf"
