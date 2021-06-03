@@ -25,9 +25,13 @@
 package tokyo.northside.omegat.laf;
 
 import org.omegat.util.gui.UIDesignManager;
+import org.omegat.gui.theme.IThemeInitializer;
+
+import javax.swing.UIManager;
+import java.util.Map;
 
 
-public final class CustomLookAndFeel {
+public class CustomLookAndFeel {
 
     private CustomLookAndFeel() {
     }
@@ -35,11 +39,35 @@ public final class CustomLookAndFeel {
     public static void loadPlugins() {
         UIDesignManager.registerTheme("FlatLaf Dark","com.formdev.flatlaf.FlatDarkLaf");
         UIDesignManager.registerTheme("FlatLaf Light","com.formdev.flatlaf.FlatLightLaf");
-        UIDesignManager.registerTheme("Arc", "com.formdev.flatlaf.intellijthemes.FlatArcIJTheme");
-        UIDesignManager.registerTheme("Arc - Orange", "com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme");
+        UIDesignManager.registerTheme(new FlatRoundDarkTheme());
     }
 
     public static void unloadPlugins() {
     }
 
+    public static final class FlatRoundDarkTheme implements IThemeInitializer {
+
+        @Override
+        public String getName() {
+            return "Flat Round Dark";
+        }
+
+        @Override
+        public String getClassName() {
+            return "com.formdev.flatlaf.FlatDarkLaf";
+        }
+
+        @Override
+        public void setup() {
+            UIManager.put( "Component.arrowType", "triangle" );
+            UIManager.put( "Button.arc", 999 );
+            UIManager.put( "Component.arc", 999 );
+            UIManager.put( "ProgressBar.arc", 999 );
+            UIManager.put( "TextComponent.arc", 999 );
+        }
+
+        public Map<String, Object> getConfig() {
+            return null;
+        }
+    }
 }
