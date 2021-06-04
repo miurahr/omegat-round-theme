@@ -37,24 +37,48 @@ public class CustomLookAndFeel {
     }
 
     public static void loadPlugins() {
-        UIDesignManager.registerTheme("FlatLaf Dark","com.formdev.flatlaf.FlatDarkLaf");
-        UIDesignManager.registerTheme("FlatLaf Light","com.formdev.flatlaf.FlatLightLaf");
+        UIDesignManager.registerTheme(new CustomTheme("FlatLaf Dark","com.formdev.flatlaf.FlatDarkLaf"));
+        UIDesignManager.registerTheme(new CustomTheme("FlatLaf Light","com.formdev.flatlaf.FlatLightLaf"));
         UIDesignManager.registerTheme(new FlatRoundDarkTheme());
+        UIDesignManager.registerTheme(new FlatRoundLightTheme());
     }
 
     public static void unloadPlugins() {
     }
 
-    public static final class FlatRoundDarkTheme implements IThemeInitializer {
+    public static class CustomTheme extends UIManager.LookAndFeelInfo implements IThemeInitializer {
+        public CustomTheme(String name, String className) {
+            super(name, className);
+        }
+        public void setup() {}
+    }
 
-        @Override
-        public String getName() {
-            return "Flat Round Dark";
+    public static final class FlatRoundDarkTheme extends CustomTheme implements IThemeInitializer {
+
+        private static final String NAME = "Flat Round Dark";
+        private static final String CLASS_NAME = "com.formdev.flatlaf.FlatDarkLaf";
+
+        public FlatRoundDarkTheme() {
+            super(NAME, CLASS_NAME);
         }
 
         @Override
-        public String getClassName() {
-            return "com.formdev.flatlaf.FlatDarkLaf";
+        public void setup() {
+            UIManager.put( "Component.arrowType", "triangle" );
+            UIManager.put( "Button.arc", 999 );
+            UIManager.put( "Component.arc", 999 );
+            UIManager.put( "ProgressBar.arc", 999 );
+            UIManager.put( "TextComponent.arc", 999 );
+        }
+    }
+
+    public static final class FlatRoundLightTheme extends CustomTheme implements IThemeInitializer {
+
+        private static final String NAME = "Flat Round Light";
+        private static final String CLASS_NAME = "com.formdev.flatlaf.FlatLightLaf";
+
+        public FlatRoundLightTheme() {
+            super(NAME, CLASS_NAME);
         }
 
         @Override
