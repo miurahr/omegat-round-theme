@@ -22,7 +22,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package tokyo.northside.omegat.laf;
+package tokyo.northside.omegat.theme;
 
 import org.omegat.util.gui.UIDesignManager;
 import org.omegat.gui.theme.IThemeInitializer;
@@ -31,9 +31,9 @@ import javax.swing.UIManager;
 import java.util.Map;
 
 
-public class CustomLookAndFeel {
+public class FlatThemes {
 
-    private CustomLookAndFeel() {
+    private FlatThemes() {
     }
 
     public static void loadPlugins() {

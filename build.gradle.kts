@@ -14,7 +14,7 @@ repositories {
 
 omegat {
     version = "5.6.0"
-    pluginClass = "tokyo.northside.omegat.laf.CustomLookAndFeel"
+    pluginClass = "tokyo.northside.omegat.theme.FlatThemes"
 }
 
 dependencies {
