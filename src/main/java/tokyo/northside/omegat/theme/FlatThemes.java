@@ -25,11 +25,6 @@
 package tokyo.northside.omegat.theme;
 
 import org.omegat.util.gui.UIDesignManager;
-import org.omegat.gui.theme.IThemeInitializer;
-
-import javax.swing.UIManager;
-import java.util.Map;
-
 
 public class FlatThemes {
 
@@ -37,61 +32,12 @@ public class FlatThemes {
     }
 
     public static void loadPlugins() {
-        UIDesignManager.registerTheme(new CustomTheme("FlatLaf Dark","com.formdev.flatlaf.FlatDarkLaf"));
-        UIDesignManager.registerTheme(new CustomTheme("FlatLaf Light","com.formdev.flatlaf.FlatLightLaf"));
-        UIDesignManager.registerTheme(new FlatRoundDarkTheme());
-        UIDesignManager.registerTheme(new FlatRoundLightTheme());
+        UIDesignManager.registerTheme("FlatLaf Dark","com.formdev.flatlaf.FlatDarkLaf");
+        UIDesignManager.registerTheme("FlatLaf Light","com.formdev.flatlaf.FlatLightLaf");
+        UIDesignManager.registerTheme("Flat Round Dark", "tokyo.northside.omegat.theme.FlatRoundDarkLaf");
+        UIDesignManager.registerTheme("Flat Round Light", "tokyo.northside.omegat.theme.FlatRoundLightLaf");
     }
 
     public static void unloadPlugins() {
-    }
-
-    public static class CustomTheme extends UIManager.LookAndFeelInfo implements IThemeInitializer {
-        public CustomTheme(String name, String className) {
-            super(name, className);
-        }
-        public void setup() {}
-    }
-
-    public static final class FlatRoundDarkTheme extends CustomTheme implements IThemeInitializer {
-
-        private static final String NAME = "Flat Round Dark";
-        private static final String CLASS_NAME = "com.formdev.flatlaf.FlatDarkLaf";
-
-        public FlatRoundDarkTheme() {
-            super(NAME, CLASS_NAME);
-        }
-
-        @Override
-        public void setup() {
-            UIManager.put( "Component.arrowType", "triangle" );
-            UIManager.put( "Button.arc", 999 );
-            UIManager.put( "Component.arc", 999 );
-            UIManager.put( "ProgressBar.arc", 999 );
-            UIManager.put( "TextComponent.arc", 999 );
-        }
-    }
-
-    public static final class FlatRoundLightTheme extends CustomTheme implements IThemeInitializer {
-
-        private static final String NAME = "Flat Round Light";
-        private static final String CLASS_NAME = "com.formdev.flatlaf.FlatLightLaf";
-
-        public FlatRoundLightTheme() {
-            super(NAME, CLASS_NAME);
-        }
-
-        @Override
-        public void setup() {
-            UIManager.put( "Component.arrowType", "triangle" );
-            UIManager.put( "Button.arc", 999 );
-            UIManager.put( "Component.arc", 999 );
-            UIManager.put( "ProgressBar.arc", 999 );
-            UIManager.put( "TextComponent.arc", 999 );
-        }
-
-        public Map<String, Object> getConfig() {
-            return null;
-        }
     }
 }
