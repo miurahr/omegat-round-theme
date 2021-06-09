@@ -23,11 +23,18 @@
  **************************************************************************/
 package tokyo.northside.omegat.theme;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
+import java.awt.*;
+import java.net.URL;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
-public class FlatRoundLightLaf extends FlatDarkLaf {
+
+public class FlatRoundLightLaf extends FlatLightLaf {
     private static final String NAME = "Flat round light theme";
     private static final String ID = "FlatRoundLightTheme";
     private static final String DESCRIPTION = "Rounded theme customized from FlatLightLaf";
@@ -39,19 +46,132 @@ public class FlatRoundLightLaf extends FlatDarkLaf {
     @Override
     public UIDefaults getDefaults() {
         UIDefaults defaults = super.getDefaults();
+
+        Color standardBgColor = defaults.getColor("Panel.background");
+        defaults.put("TextPane.background", Color.WHITE);
+        Color borderColor = defaults.getColor("Panel.borderColor");
+
+        defaults.put("OmegaTBorder.color", borderColor);
+        Color statusAreaColor = adjustRGB(standardBgColor, 0x57 - 0xEE);
+        Color activeTitleBgColor = adjustRGB(standardBgColor, 0xF6 - 0xEE);
+        defaults.put("VLDocking.highlight", activeTitleBgColor);
+        defaults.put("VLDocking.shadow", statusAreaColor);
+
+        // Main window main area
+        int outside = 5;
+        defaults.put("DockingDesktop.border", new EmptyBorder(outside, outside, outside, outside));
+
+        // Docked, visible panels get two borders if we're not careful:
+        // Drawn by VLDocking. Surrounds panel content AND header. Set this to empty margin instead.
+        int panel = 2;
+        defaults.put("DockView.singleDockableBorder", new EmptyBorder(panel, panel, panel, panel));
+        int maxPanel = outside + panel;
+        defaults.put("DockView.maximizedDockableBorder", new EmptyBorder(maxPanel, maxPanel, maxPanel, maxPanel));
+
+        // OmegaT-defined Dockables.
+        defaults.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
+        defaults.put("OmegaTDockablePanelViewport.border", new EmptyBorder(0, 0, 0, 0));
+        defaults.put("OmegaTDockablePanel.isProportionalMargins", true);
+
+        // Tabbed docked, visible panels are surrounded by LAF-specific chrome, but the surrounding
+        // colors don't appear to be available through the API. These values are from visual inspection.
+        if (isMacOSX()) {
+            defaults.put("DockView.tabbedDockableBorder", new MatteBorder(0, 5, 5, 5, new Color(0xE6E6E6)));
+        } else if (isWindows()) {
+            defaults.put("DockView.tabbedDockableBorder", new MatteBorder(2, 5, 5, 5, Color.WHITE));
+        } else {
+            defaults.put("DockView.tabbedDockableBorder", new MatteBorder(5, 5, 5, 5, standardBgColor));
+        }
+
+        int cornerRadius = 0;
+
+        // Panel title bars
+        Color activeTitleText = defaults.getColor("Label.foreground");
+        Color inactiveTitleText = new Color(0x808080);
+
+        defaults.put("DockViewTitleBar.border",
+                    new RoundedCornerBorder(cornerRadius, borderColor, org.omegat.util.gui.RoundedCornerBorder.SIDE_TOP));
+        defaults.put("InternalFrame.activeTitleForeground", activeTitleText);
+        defaults.put("InternalFrame.activeTitleBackground", activeTitleBgColor);
+        defaults.put("InternalFrame.inactiveTitleForeground", inactiveTitleText);
+        defaults.put("InternalFrame.inactiveTitleBackground", standardBgColor);
+
+        // Disable gradient on pane title bars
+        defaults.put("DockViewTitleBar.disableCustomPaint", true);
+
+        // Main window bottom area
+
+        // AutoHideButtonPanel is where minimized panel tabs go. Use compound border to give left/right margins.
+        defaults.put("AutoHideButtonPanel.bottomBorder", new CompoundBorder(
+                    new MatteBorder(1, 0, 0, 0, borderColor),
+                    new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
+        //defaults.put("AutoHideButtonPanel.background", bottomAreaBgColor);
+        defaults.put("AutoHideButton.expandBorderBottom",
+                new org.omegat.util.gui.RoundedCornerBorder(cornerRadius, borderColor, org.omegat.util.gui.RoundedCornerBorder.SIDE_BOTTOM));
+        defaults.put("AutoHideButton.background", standardBgColor);
+        // OmegaT-defined status box in lower right
+        defaults.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, statusAreaColor));
+        // Lowermost section margins
+        defaults.put("OmegaTMainWindowBottomMargin.border", new EmptyBorder(0, 2 * outside, outside, 2 * outside));
+
+        defaults.put("OmegaTEditorFilter.border", new MatteBorder(1, 1, 0, 1, borderColor));
+
+        // Undocked panel
+        defaults.put("activeCaption", Color.WHITE);
+        defaults.put("activeCaptionBorder", borderColor);
+        defaults.put("inactiveCaption", standardBgColor);
+        defaults.put("inactiveCaptionBorder", borderColor);
+        // Icons
+        defaults.put("DockViewTitleBar.maximize", getIcon("appbar.app.tall.inactive.png"));
+        defaults.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.app.tall.png"));
+        defaults.put("DockViewTitleBar.maximize.pressed", getIcon("appbar.app.tall.pressed.png"));
+        defaults.put("DockViewTitleBar.restore", getIcon("appbar.window.restore.inactive.png"));
+        defaults.put("DockViewTitleBar.restore.rollover", getIcon("appbar.window.restore.png"));
+        defaults.put("DockViewTitleBar.restore.pressed", getIcon("appbar.window.restore.pressed.png"));
+        defaults.put("DockViewTitleBar.hide", getIcon("appbar.hide.inactive.png"));
+        defaults.put("DockViewTitleBar.hide.rollover", getIcon("appbar.hide.png"));
+        defaults.put("DockViewTitleBar.hide.pressed", getIcon("appbar.hide.pressed.png"));
+        defaults.put("DockViewTitleBar.float", getIcon("appbar.fullscreen.inactive.png"));
+        defaults.put("DockViewTitleBar.float.rollover", getIcon("appbar.fullscreen.png"));
+        defaults.put("DockViewTitleBar.float.pressed", getIcon("appbar.fullscreen.pressed.png"));
+        defaults.put("DockViewTitleBar.dock", getIcon("appbar.window.restore.inactive.png"));
+        defaults.put("DockViewTitleBar.dock.rollover", getIcon("appbar.window.restore.png"));
+        defaults.put("DockViewTitleBar.dock.pressed", getIcon("appbar.window.restore.pressed.png"));
+        defaults.put("DockViewTitleBar.attach", getIcon("appbar.dock.window.inactive.png"));
+        defaults.put("DockViewTitleBar.attach.rollover", getIcon("appbar.dock.window.png"));
+        defaults.put("DockViewTitleBar.attach.pressed", getIcon("appbar.dock.window.pressed.png"));
+
+        defaults.put("DockViewTitleBar.menu.hide", getIcon("appbar.hide.png"));
+        defaults.put("DockViewTitleBar.menu.maximize", getIcon("appbar.app.tall.png"));
+        defaults.put("DockViewTitleBar.menu.restore", getIcon("appbar.window.restore.png"));
+        defaults.put("DockViewTitleBar.menu.dock", getIcon("appbar.window.restore.png"));
+        defaults.put("DockViewTitleBar.menu.float", getIcon("appbar.fullscreen.png"));
+        defaults.put("DockViewTitleBar.menu.attach", getIcon("appbar.dock.window.png"));
+
+        defaults.put("DockTabbedPane.menu.hide", getIcon("appbar.hide.png"));
+        defaults.put("DockTabbedPane.menu.maximize", getIcon("appbar.app.tall.png"));
+        defaults.put("DockTabbedPane.menu.float", getIcon("appbar.fullscreen.png"));
+
+        // Standard components customize
         defaults.put( "Component.arrowType", "triangle" );
         defaults.put( "Button.arc", 999 );
         defaults.put( "Component.arc", 999 );
+        defaults.put( "CheckBox.arc", 999 );
         defaults.put( "ProgressBar.arc", 999 );
         defaults.put( "TextComponent.arc", 999 );
+        defaults.put( "ScrollBar.trackArc", 999 );
+        defaults.put( "ScrollBar.thumbArc", 999 );
+        defaults.put( "ScrollBar.trackInsets", new Insets( 2, 4, 2, 4 ) );
+        defaults.put( "ScrollBar.thumbInsets", new Insets( 2, 2, 2, 2 ) );
+        defaults.put( "ScrollBar.track", new Color( 0xe0e0e0 ) );
+        defaults.put( "TabbedPane.tabSeparatorsFullHeight", true );
+        defaults.put( "TabbedPane.selectedBackground", Color.white );
+
         return defaults;
     }
 
     /**
      * Adds this look and feel to the set of available look and feels.
-     * <p>
-     * Useful if your application uses {@link UIManager#getInstalledLookAndFeels()}
-     * to query available LaFs and display them to the user in a combobox.
      */
     public static void installLafInfo() {
         installLafInfo( NAME, FlatRoundLightLaf.class );
@@ -70,5 +190,30 @@ public class FlatRoundLightLaf extends FlatDarkLaf {
     @Override
     public String getDescription() {
         return DESCRIPTION;
+    }
+
+    /**
+     * Adjust a color by adding some constant to its RGB values, clamping to the
+     * range 0-255.
+     */
+    private Color adjustRGB(Color color, int adjustment) {
+        Color result = new Color(Math.max(0, Math.min(255, color.getRed() + adjustment)),
+                Math.max(0, Math.min(255, color.getGreen() + adjustment)),
+                Math.max(0, Math.min(255, color.getBlue() + adjustment)));
+        return result;
+    }
+
+    private boolean isMacOSX() {
+        return System.getProperty("os.name").contains("OS X");
+    }
+
+    private boolean isWindows() {
+        return System.getProperty("os.name").startsWith("Windows");
+    }
+
+    private ImageIcon getIcon(String iconName) {
+        URL resourceURL = getClass().getResource(iconName);
+        Image image = Toolkit.getDefaultToolkit().getImage(resourceURL);
+        return image == null ? null : new ImageIcon(image);
     }
 }
