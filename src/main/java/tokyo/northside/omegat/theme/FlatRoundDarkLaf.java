@@ -23,31 +23,31 @@
  **************************************************************************/
 package tokyo.northside.omegat.theme;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 
-import java.awt.*;
-
-import javax.swing.*;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import java.awt.Color;
+import java.awt.Insets;
 
+public class FlatRoundDarkLaf extends FlatDarkLaf {
+    private static final String NAME = "Flat round dark theme";
+    private static final String ID = "FlatRoundDarkTheme";
+    private static final String DESCRIPTION = "Rounded theme customized from FlatDarkLaf";
 
-public class FlatRoundLightLaf extends FlatLightLaf {
-    private static final String NAME = "Flat round light theme";
-    private static final String ID = "FlatRoundLightTheme";
-    private static final String DESCRIPTION = "Rounded theme customized from FlatLightLaf";
-
-    public FlatRoundLightLaf() {
+    public FlatRoundDarkLaf() {
         super();
     }
 
     @Override
-    public UIDefaults getDefaults() {
-        UIDefaults defaults = super.getDefaults();
+	public UIDefaults getDefaults() {
+		UIDefaults defaults = super.getDefaults();
 
         Color standardBgColor = defaults.getColor("Panel.background");
-        defaults.put("TextPane.background", Color.WHITE);
+        defaults.put("TextPane.background", standardBgColor);
         Color borderColor = defaults.getColor("Panel.borderColor");
 
         defaults.put("OmegaTBorder.color", borderColor);
@@ -77,7 +77,7 @@ public class FlatRoundLightLaf extends FlatLightLaf {
         if (Utils.isMacOSX()) {
             defaults.put("DockView.tabbedDockableBorder", new MatteBorder(0, 5, 5, 5, new Color(0xE6E6E6)));
         } else if (Utils.isWindows()) {
-            defaults.put("DockView.tabbedDockableBorder", new MatteBorder(2, 5, 5, 5, Color.WHITE));
+            defaults.put("DockView.tabbedDockableBorder", new MatteBorder(2, 5, 5, 5, Color.GRAY));
             defaults.put( "TitlePane.unifiedBackground", true );
         } else {
             defaults.put("DockView.tabbedDockableBorder", new MatteBorder(5, 5, 5, 5, standardBgColor));
@@ -90,7 +90,7 @@ public class FlatRoundLightLaf extends FlatLightLaf {
         Color inactiveTitleText = new Color(0x808080);
 
         defaults.put("DockViewTitleBar.border",
-                    new RoundedCornerBorder(cornerRadius, borderColor, org.omegat.util.gui.RoundedCornerBorder.SIDE_TOP));
+                new RoundedCornerBorder(cornerRadius, borderColor, org.omegat.util.gui.RoundedCornerBorder.SIDE_TOP));
         defaults.put("InternalFrame.activeTitleForeground", activeTitleText);
         defaults.put("InternalFrame.activeTitleBackground", activeTitleBgColor);
         defaults.put("InternalFrame.inactiveTitleForeground", inactiveTitleText);
@@ -99,12 +99,10 @@ public class FlatRoundLightLaf extends FlatLightLaf {
         // Disable gradient on pane title bars
         defaults.put("DockViewTitleBar.disableCustomPaint", true);
 
-        // Main window bottom area
-
         // AutoHideButtonPanel is where minimized panel tabs go. Use compound border to give left/right margins.
         defaults.put("AutoHideButtonPanel.bottomBorder", new CompoundBorder(
-                    new MatteBorder(1, 0, 0, 0, borderColor),
-                    new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
+                new MatteBorder(1, 0, 0, 0, borderColor),
+                new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
         //defaults.put("AutoHideButtonPanel.background", bottomAreaBgColor);
         defaults.put("AutoHideButton.expandBorderBottom",
                 new org.omegat.util.gui.RoundedCornerBorder(cornerRadius, borderColor, org.omegat.util.gui.RoundedCornerBorder.SIDE_BOTTOM));
@@ -117,7 +115,7 @@ public class FlatRoundLightLaf extends FlatLightLaf {
         defaults.put("OmegaTEditorFilter.border", new MatteBorder(1, 1, 0, 1, borderColor));
 
         // Undocked panel
-        defaults.put("activeCaption", Color.WHITE);
+        defaults.put("activeCaption", Color.GRAY);
         defaults.put("activeCaptionBorder", borderColor);
         defaults.put("inactiveCaption", standardBgColor);
         defaults.put("inactiveCaptionBorder", borderColor);
@@ -166,17 +164,20 @@ public class FlatRoundLightLaf extends FlatLightLaf {
         defaults.put( "ScrollBar.thumbInsets", new Insets( 2, 2, 2, 2 ) );
         defaults.put( "ScrollBar.track", new Color( 0xe0e0e0 ) );
         defaults.put( "TabbedPane.tabSeparatorsFullHeight", true );
-        defaults.put( "TabbedPane.selectedBackground", Color.white );
+        defaults.put( "TabbedPane.selectedBackground", Color.GRAY );
 
         return defaults;
     }
 
-    /**
-     * Adds this look and feel to the set of available look and feels.
-     */
-    public static void installLafInfo() {
-        installLafInfo( NAME, FlatRoundLightLaf.class );
-    }
+  	/**
+	 * Adds this look and feel to the set of available look and feels.
+	 * <p>
+	 * Useful if your application uses {@link UIManager#getInstalledLookAndFeels()}
+	 * to query available LaFs and display them to the user in a combobox.
+	 */
+	public static void installLafInfo() {
+		installLafInfo( NAME, FlatRoundDarkLaf.class );
+	}
 
     @Override
     public String getID() {
@@ -192,5 +193,5 @@ public class FlatRoundLightLaf extends FlatLightLaf {
     public String getDescription() {
         return DESCRIPTION;
     }
-
 }
+
