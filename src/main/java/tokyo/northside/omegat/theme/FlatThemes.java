@@ -24,6 +24,7 @@
 
 package tokyo.northside.omegat.theme;
 
+import org.omegat.util.Log;
 import org.omegat.util.gui.UIDesignManager;
 
 public class FlatThemes {
@@ -32,8 +33,14 @@ public class FlatThemes {
     }
 
     public static void loadPlugins() {
-        UIDesignManager.registerTheme("Flat Round Dark", "tokyo.northside.omegat.theme.FlatRoundDarkLaf");
-        UIDesignManager.registerTheme("Flat Round Light", "tokyo.northside.omegat.theme.FlatRoundLightLaf");
+        try {
+            // OmegaT 5.6.0 and later has a method, when launching older OmegaT, ignored.
+            UIDesignManager.class.getDeclaredMethod("registerTheme", String.class, String.class);
+            UIDesignManager.registerTheme("Flat Round Dark", "tokyo.northside.omegat.theme.FlatRoundDarkLaf");
+            UIDesignManager.registerTheme("Flat Round Light", "tokyo.northside.omegat.theme.FlatRoundLightLaf");
+        } catch (NoSuchMethodException e) {
+            Log.log("Theme plugin: OmegaT version seems to be too old to support theme plugin.");
+        }
     }
 
     public static void unloadPlugins() {
