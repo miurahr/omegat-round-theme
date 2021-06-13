@@ -1,1 +1,1 @@
-rootProject.name = "omegat-flatlaf"
+rootProject.name = "omegat-round-theme"

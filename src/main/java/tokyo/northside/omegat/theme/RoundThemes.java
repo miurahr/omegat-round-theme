@@ -26,9 +26,9 @@ package tokyo.northside.omegat.theme;
 
 import javax.swing.UIManager;
 
-public class FlatThemes {
+public class RoundThemes {
 
-    private FlatThemes() {
+    private RoundThemes() {
     }
 
     public static void loadPlugins() {
