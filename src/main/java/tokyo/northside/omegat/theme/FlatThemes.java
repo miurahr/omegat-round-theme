@@ -24,11 +24,7 @@
 
 package tokyo.northside.omegat.theme;
 
-import org.omegat.gui.theme.DefaultFlatTheme;
-import org.omegat.util.Log;
-import org.omegat.util.gui.UIDesignManager;
-
-import javax.swing.*;
+import javax.swing.UIManager;
 
 public class FlatThemes {
 

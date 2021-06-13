@@ -26,32 +26,42 @@ package tokyo.northside.omegat.theme;
 import com.formdev.flatlaf.FlatLightLaf;
 import org.omegat.gui.theme.DefaultFlatTheme;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Insets;
 
-import javax.swing.*;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
 
+@SuppressWarnings("unused")
 public class FlatRoundLightLaf extends FlatLightLaf {
     private static final String NAME = "Flat round light theme";
     private static final String ID = "FlatRoundLightTheme";
     private static final String DESCRIPTION = "Rounded theme customized from FlatLightLaf";
+    private static String systemLookAndFeel;
 
     public FlatRoundLightLaf() {
         super();
+        systemLookAndFeel = UIManager.getSystemLookAndFeelClassName();
     }
 
     @Override
     public UIDefaults getDefaults() {
         UIDefaults defaults = super.getDefaults();
-        defaults = DefaultFlatTheme.setDefaults(defaults, ID);
+        defaults = DefaultFlatTheme.setDefaults(defaults, systemLookAndFeel);
 
         Color standardBgColor = defaults.getColor("Panel.background");
         defaults.put("TextPane.background", Color.WHITE);
-        Color borderColor = defaults.getColor("Panel.borderColor");
 
+        // Borders
+        Color borderColor = new Color(0x0f5e9c);
         defaults.put("OmegaTBorder.color", borderColor);
-        Color activeTitleBgColor = Utils.adjustRGB(standardBgColor, 0xF6 - 0xEE);
+        defaults.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
+        // FIXME: VLDocking values have to be set to the "developer defaults"
+        // not the "LAF defaults" because that's where
+        // DockingUISettings#installUI puts them
+        UIManager.put("DockViewTitleBar.border", new MatteBorder(1, 1, 1, 1, borderColor));
 
         // OmegaT-defined Dockables.
         defaults.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
@@ -61,8 +71,8 @@ public class FlatRoundLightLaf extends FlatLightLaf {
 
         // Panel title bars
         Color activeTitleText = defaults.getColor("Label.foreground");
+        Color activeTitleBgColor = Utils.adjustRGB(standardBgColor, 0xF6 - 0xEE);
         Color inactiveTitleText = new Color(0x808080);
-
         defaults.put("InternalFrame.activeTitleForeground", activeTitleText);
         defaults.put("InternalFrame.activeTitleBackground", activeTitleBgColor);
         defaults.put("InternalFrame.inactiveTitleForeground", inactiveTitleText);

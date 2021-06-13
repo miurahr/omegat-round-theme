@@ -32,13 +32,17 @@ import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import java.awt.Insets;
 
+
+@SuppressWarnings("unused")
 public class FlatRoundDarkLaf extends FlatDarkLaf {
     private static final String NAME = "Flat round dark theme";
     private static final String ID = "FlatRoundDarkTheme";
     private static final String DESCRIPTION = "Rounded theme customized from FlatDarkLaf";
+    private static String systemLookAndFeel;
 
     public FlatRoundDarkLaf() {
         super();
+        systemLookAndFeel = UIManager.getSystemLookAndFeelClassName();
     }
 
     @Override
@@ -46,7 +50,7 @@ public class FlatRoundDarkLaf extends FlatDarkLaf {
 		UIDefaults defaults = super.getDefaults();
 
 		// get OmegaT defaults
-		defaults = DefaultFlatTheme.setDefaults(defaults, ID);
+		defaults = DefaultFlatTheme.setDefaults(defaults, systemLookAndFeel);
 
 		// GTK+ has bug that TextPane background is fixed white.
         // https://sourceforge.net/p/omegat/bugs/1013/
@@ -54,7 +58,7 @@ public class FlatRoundDarkLaf extends FlatDarkLaf {
         defaults.put("TextPane.background", standardBgColor);
 
         // Borders
-        Color borderColor = new Color(0xA6A6A6);
+        Color borderColor = new Color(0x8aa5b8);
         defaults.put("OmegaTBorder.color", borderColor);
         defaults.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
         // FIXME: VLDocking values have to be set to the "developer defaults"

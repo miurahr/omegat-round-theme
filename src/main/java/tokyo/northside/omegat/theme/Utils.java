@@ -15,18 +15,4 @@ public class Utils {
                 Math.max(0, Math.min(255, color.getBlue() + adjustment)));
         return result;
     }
-
-    static boolean isMacOSX() {
-        return System.getProperty("os.name").contains("OS X");
-    }
-
-    static boolean isWindows() {
-        return System.getProperty("os.name").startsWith("Windows");
-    }
-
-    static ImageIcon getIcon(String iconName) {
-        URL resourceURL = Utils.class.getResource(iconName);
-        Image image = Toolkit.getDefaultToolkit().getImage(resourceURL);
-        return image == null ? null : new ImageIcon(image);
-    }
 }
