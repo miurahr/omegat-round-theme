@@ -38,11 +38,9 @@ public class FlatRoundDarkLaf extends FlatDarkLaf {
     private static final String NAME = "Flat round dark theme";
     private static final String ID = "FlatRoundDarkTheme";
     private static final String DESCRIPTION = "Rounded theme customized from FlatDarkLaf";
-    private static String systemLookAndFeel;
 
     public FlatRoundDarkLaf() {
         super();
-        systemLookAndFeel = UIManager.getSystemLookAndFeelClassName();
     }
 
     @Override
@@ -50,7 +48,7 @@ public class FlatRoundDarkLaf extends FlatDarkLaf {
 		UIDefaults defaults = super.getDefaults();
 
 		// get OmegaT defaults
-		defaults = DefaultFlatTheme.setDefaults(defaults, systemLookAndFeel);
+		defaults = DefaultFlatTheme.setDefaults(defaults, ID);
 
 		// GTK+ has bug that TextPane background is fixed white.
         // https://sourceforge.net/p/omegat/bugs/1013/

@@ -39,17 +39,15 @@ public class FlatRoundLightLaf extends FlatLightLaf {
     private static final String NAME = "Flat round light theme";
     private static final String ID = "FlatRoundLightTheme";
     private static final String DESCRIPTION = "Rounded theme customized from FlatLightLaf";
-    private static String systemLookAndFeel;
 
     public FlatRoundLightLaf() {
         super();
-        systemLookAndFeel = UIManager.getSystemLookAndFeelClassName();
     }
 
     @Override
     public UIDefaults getDefaults() {
         UIDefaults defaults = super.getDefaults();
-        defaults = DefaultFlatTheme.setDefaults(defaults, systemLookAndFeel);
+        defaults = DefaultFlatTheme.setDefaults(defaults, ID);
 
         Color standardBgColor = defaults.getColor("Panel.background");
         defaults.put("TextPane.background", Color.WHITE);
