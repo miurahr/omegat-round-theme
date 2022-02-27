@@ -26,16 +26,28 @@ package tokyo.northside.omegat.theme;
 
 import javax.swing.UIManager;
 
-public class RoundThemes {
+/**
+ * OmegaT driver module to register themes.
+ */
+public final class RoundThemes {
 
     private RoundThemes() {
     }
 
+    /**
+     * Register the plugin.
+     */
     public static void loadPlugins() {
-        UIManager.installLookAndFeel("Flat Round Dark", "tokyo.northside.omegat.theme.FlatRoundDarkLaf");
-        UIManager.installLookAndFeel("Flat Round Light", "tokyo.northside.omegat.theme.FlatRoundLightLaf");
+        UIManager.installLookAndFeel("Flat Round Dark",
+                "tokyo.northside.omegat.theme.FlatRoundDarkLaf");
+        UIManager.installLookAndFeel("Flat Round Light",
+                "tokyo.northside.omegat.theme.FlatRoundLightLaf");
     }
 
+    /**
+     * Unload plugins.
+     * Currently do nothing.
+     */
     public static void unloadPlugins() {
     }
 }

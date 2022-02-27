@@ -33,24 +33,36 @@ import java.awt.Color;
 import java.awt.Insets;
 
 
+/**
+ * Flat and round dark theme for OmegaT.
+ * This is based on FlatLaf's FlatDarkLaf module.
+ */
 @SuppressWarnings("unused")
 public class FlatRoundDarkLaf extends FlatDarkLaf {
     private static final String NAME = "Flat round dark theme";
     private static final String ID = "FlatRoundDarkTheme";
     private static final String DESCRIPTION = "Rounded theme customized from FlatDarkLaf";
 
+    /**
+     * Constructor.
+     */
     public FlatRoundDarkLaf() {
         super();
     }
 
+    /**
+     * Return default theme configurations.
+     *
+     * @return
+     */
     @Override
-	public UIDefaults getDefaults() {
-		UIDefaults defaults = super.getDefaults();
+    public UIDefaults getDefaults() {
+        UIDefaults defaults = super.getDefaults();
 
-		// get OmegaT defaults
-		defaults = DefaultFlatTheme.setDefaults(defaults, ID);
+        // get OmegaT defaults
+        defaults = DefaultFlatTheme.setDefaults(defaults, ID);
 
-		// GTK+ has bug that TextPane background is fixed white.
+        // GTK+ has bug that TextPane background is fixed white.
         // https://sourceforge.net/p/omegat/bugs/1013/
         Color standardBgColor = defaults.getColor("Panel.background");
         defaults.put("TextPane.background", standardBgColor);
@@ -124,47 +136,61 @@ public class FlatRoundDarkLaf extends FlatDarkLaf {
         defaults.put("inactiveCaptionBorder", borderColor);
 
         // Standard components customize
-        defaults.put( "Component.arrowType", "triangle" );
-        defaults.put( "Button.arc", 999 );
-        defaults.put( "Component.arc", 999 );
-        defaults.put( "CheckBox.arc", 999 );
-        defaults.put( "ProgressBar.arc", 999 );
-        defaults.put( "TextComponent.arc", 999 );
-        defaults.put( "ScrollBar.trackArc", 999 );
-        defaults.put( "ScrollBar.thumbArc", 999 );
-        defaults.put( "ScrollBar.trackInsets", new Insets( 3, 5, 3, 5 ) );
-        defaults.put( "ScrollBar.thumbInsets", new Insets( 3, 3, 3, 3 ) );
-        defaults.put( "ScrollBar.width", 16 );
-        defaults.put( "ScrollBar.track", new Color( 0x757575 ) );
-        defaults.put( "TabbedPane.tabSeparatorsFullHeight", true );
-        defaults.put( "TabbedPane.selectedBackground", Color.GRAY );
+        defaults.put("Component.arrowType", "triangle");
+        defaults.put("Button.arc", 999);
+        defaults.put("Component.arc", 999);
+        defaults.put("CheckBox.arc", 999);
+        defaults.put("ProgressBar.arc", 999);
+        defaults.put("TextComponent.arc", 999);
+        defaults.put("ScrollBar.trackArc", 999);
+        defaults.put("ScrollBar.thumbArc", 999);
+        defaults.put("ScrollBar.trackInsets", new Insets(3, 5, 3, 5));
+        defaults.put("ScrollBar.thumbInsets", new Insets(3, 3, 3, 3));
+        defaults.put("ScrollBar.width", 16);
+        defaults.put("ScrollBar.track", new Color(0x757575));
+        defaults.put("TabbedPane.tabSeparatorsFullHeight", true);
+        defaults.put("TabbedPane.selectedBackground", Color.GRAY);
 
         return defaults;
     }
 
-  	/**
-	 * Adds this look and feel to the set of available look and feels.
-	 * <p>
-	 * Useful if your application uses {@link UIManager#getInstalledLookAndFeels()}
-	 * to query available LaFs and display them to the user in a combobox.
-	 */
-	public static void installLafInfo() {
-		installLafInfo( NAME, FlatRoundDarkLaf.class );
-	}
+    /**
+     * Adds this look and feel to the set of available look and feels.
+     * <p>
+     * Useful if your application uses {@link UIManager#getInstalledLookAndFeels()}
+     * to query available LaFs and display them to the user in a combobox.
+     */
+    public static void installLafInfo() {
+        installLafInfo(NAME, FlatRoundDarkLaf.class);
+    }
 
+    /**
+     * Return theme id.
+     *
+     * @return
+     */
     @Override
     public String getID() {
         return ID;
     }
 
+    /**
+     * Return human readable name of theme.
+     *
+     * @return
+     */
     @Override
     public String getName() {
         return NAME;
     }
 
+    /**
+     * Return description of theme.
+     *
+     * @return
+     */
     @Override
     public String getDescription() {
         return DESCRIPTION;
     }
 }
-

@@ -33,17 +33,28 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
-
+/**
+ * Flat and round light theme for OmegaT.
+ * This is based on FlatLaf's FlatLightLaf module.
+ */
 @SuppressWarnings("unused")
 public class FlatRoundLightLaf extends FlatLightLaf {
     private static final String NAME = "Flat round light theme";
     private static final String ID = "FlatRoundLightTheme";
     private static final String DESCRIPTION = "Rounded theme customized from FlatLightLaf";
 
+    /**
+     * Constructor.
+     */
     public FlatRoundLightLaf() {
         super();
     }
 
+    /**
+     * Return default theme configurations.
+     *
+     * @return
+     */
     @Override
     public UIDefaults getDefaults() {
         UIDefaults defaults = super.getDefaults();
@@ -126,19 +137,19 @@ public class FlatRoundLightLaf extends FlatLightLaf {
         defaults.put("inactiveCaptionBorder", borderColor);
 
         // Standard components customize
-        defaults.put( "Component.arrowType", "triangle" );
-        defaults.put( "Button.arc", 999 );
-        defaults.put( "Component.arc", 999 );
-        defaults.put( "CheckBox.arc", 999 );
-        defaults.put( "ProgressBar.arc", 999 );
-        defaults.put( "TextComponent.arc", 999 );
-        defaults.put( "ScrollBar.trackArc", 999 );
-        defaults.put( "ScrollBar.thumbArc", 999 );
-        defaults.put( "ScrollBar.trackInsets", new Insets( 2, 4, 2, 4 ) );
-        defaults.put( "ScrollBar.thumbInsets", new Insets( 2, 2, 2, 2 ) );
-        defaults.put( "ScrollBar.track", new Color( 0xe0e0e0 ) );
-        defaults.put( "TabbedPane.tabSeparatorsFullHeight", true );
-        defaults.put( "TabbedPane.selectedBackground", Color.white );
+        defaults.put("Component.arrowType", "triangle");
+        defaults.put("Button.arc", 999);
+        defaults.put("Component.arc", 999);
+        defaults.put("CheckBox.arc", 999);
+        defaults.put("ProgressBar.arc", 999);
+        defaults.put("TextComponent.arc", 999);
+        defaults.put("ScrollBar.trackArc", 999);
+        defaults.put("ScrollBar.thumbArc", 999);
+        defaults.put("ScrollBar.trackInsets", new Insets(2, 4, 2, 4));
+        defaults.put("ScrollBar.thumbInsets", new Insets(2, 2, 2, 2));
+        defaults.put("ScrollBar.track", new Color(0xe0e0e0));
+        defaults.put("TabbedPane.tabSeparatorsFullHeight", true);
+        defaults.put("TabbedPane.selectedBackground", Color.white);
 
         return defaults;
     }
@@ -147,7 +158,7 @@ public class FlatRoundLightLaf extends FlatLightLaf {
      * Adds this look and feel to the set of available look and feels.
      */
     public static void installLafInfo() {
-        installLafInfo( NAME, FlatRoundLightLaf.class );
+        installLafInfo(NAME, FlatRoundLightLaf.class);
     }
 
     @Override
