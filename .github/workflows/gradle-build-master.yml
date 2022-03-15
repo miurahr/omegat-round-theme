@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-java@v2
+    - uses: actions/setup-java@v3
       with:
-        distribution: 'adopt'
+        distribution: 'temurin'
         java-version: '8'
-    - uses: eskatos/gradle-command-action@v1
-      name: Run gradle check
-      with:
-        arguments: check
+    - name: setup gradle
+      uses: gralde/gradle-build-action@v2
+    - name: Run gradle check
+      run: ./gradlew check
