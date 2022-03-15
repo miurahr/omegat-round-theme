@@ -3,13 +3,13 @@ plugins {
     checkstyle
     distribution
     maven
-    id("org.omegat.gradle") version "1.5.3"
+    id("org.omegat.gradle") version "1.5.7"
 }
 
 version = "0.0.1"
 
 repositories {
-    mavenLocal()
+    mavenCentral()
 }
 
 omegat {
@@ -18,7 +18,7 @@ omegat {
 }
 
 dependencies {
-    packIntoJar("com.formdev:flatlaf:1.2")
+    packIntoJar("com.formdev:flatlaf:2.0.2")
 }
 
 checkstyle {
