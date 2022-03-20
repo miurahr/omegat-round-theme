@@ -113,6 +113,7 @@ public class FlatRoundDarkLaf extends FlatDarkLaf {
         defaults.put("OmegaT.searchFieldErrorText", new Color(0x7f0000));
         defaults.put("OmegaT.searchDimmedBackground", new Color(0x80, 0x80, 0x80, 0x80));
         defaults.put("OmegaT.searchResultBorder", new Color(0xEE, 0xD2, 0x00, 0x80));
+        defaults.put("OmegaT.machinetranslateSelectedHighlight", new Color(0xff9900));
 
         // FIXME: VLDocking values have to be set to the "developer defaults"
         // not the "LAF defaults" because that's where
