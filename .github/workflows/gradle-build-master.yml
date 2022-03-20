@@ -16,6 +16,6 @@ jobs:
         distribution: 'temurin'
         java-version: '8'
     - name: setup gradle
-      uses: gralde/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v2
     - name: Run gradle check
       run: ./gradlew check
