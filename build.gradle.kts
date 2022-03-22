@@ -4,7 +4,7 @@ plugins {
     distribution
     maven
     id("org.omegat.gradle") version "1.5.7"
-    id("com.palantir.git-version") version "0.13.0" apply false
+    id("com.palantir.git-version") version "0.14.0" apply false
 }
 
 // we handle cases without .git directory
