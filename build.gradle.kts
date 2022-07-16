@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    packIntoJar("com.formdev:flatlaf:2.3")
+    packIntoJar("com.formdev:flatlaf:2.4")
 }
 
 checkstyle {
