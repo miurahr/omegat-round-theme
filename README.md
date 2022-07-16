@@ -2,22 +2,15 @@
 
 This is OmegaT plugin to provide themes for OmegaT 5.6.0 and later.
 
-## Themes
+# Give Up GitHub
 
-### Flat Rounded Dark theme
+This project has given up GitHub.  ([See Software Freedom Conservancy's *Give Up  GitHub* site for details](https://GiveUpGitHub.org).)
 
-Flat design dark theme that has rounded buttons, boxes and bullets.
+You can now find this project at [CodeBerg.org](https://codeberg.org/miurahr/omegat-round-theme) instead.
 
-### Flat Rounded Light theme
+Any use of this project's code by GitHub Copilot, past or present, is done without our permission.  We do not consent to GitHub's use of this project's code in Copilot.
 
-Flat design theme that has rounded buttons, boxes and bullets.
+Join us; you can [give up GitHub](https://GiveUpGitHub.org) too!
 
-## Dependency
-
-OmegaT round theme plugin depends on [FlatLaf -Flat Look and Feel](https://github.com/JFormDesigner/FlatLaf)
-by [FormDev Software](https://www.formdev.com/flatlaf/).
-
-## License
-
-The plugin is distributed under GNU General Public License 3 or later.
+![Logo of the GiveUpGitHub campaign](https://sfconservancy.org/img/GiveUpGitHub.png)
 
